@@ -1,2 +1,1 @@
-# bdt
-Blogger Default Theme
+# Blogger Default Theme
