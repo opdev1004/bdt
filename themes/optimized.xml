@@ -6,8 +6,8 @@
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
   	<b:if cond='data:blog.postImageUrl'>
   	<b:else/>
-      	<b:comment>This is meta tag for open graph image that you may want to set up for default. Remove comment tag for use.</b:comment>
-    		<b:comment><meta content='https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=w1200' property='og:image'/></b:comment>
+      <b:comment>This is meta tag for open graph image that you may want to set up for default. Remove comment tag for use.</b:comment>
+  		<b:comment><meta content='https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=w1200' property='og:image'/></b:comment>
   	</b:if>
 
     <b:comment>if it is post page, show these tags for possible SEO</b:comment>
@@ -26,6 +26,7 @@
 
     <b:comment>Style for all</b:comment>
     <b:skin><![CDATA[
+
         /*
         -----------------------------------------------
         Blogger Template Style
@@ -73,11 +74,28 @@
       			<Variable name="footer.font" description="Footer Font" type="font" default="15px Roboto, sans-serif"  value="15px Roboto, sans-serif"/>
         </Group>
         */
-  	]]></b:skin>
+
+    ]]></b:skin>
 
     <b:comment>Style for layout page</b:comment>
     <b:template-skin><![CDATA[
     ]]></b:template-skin>
+
+
+    <script type='text/javascript'>
+    //<![CDATA[
+		function toClipboard(str) {
+			var el = document.createElement('textarea');
+      el.setAttribute('readonly', '');
+      el.style = {position: 'absolute', left: '-9999px'};
+			el.value = str;
+			document.body.appendChild(el);
+			el.select();
+			document.execCommand('copy');
+			document.body.removeChild(el);
+		}
+    //]]>
+    </script>
 
 
     <b:if cond='data:widgets.AdSense.first or data:blog.adsenseClientId'>
@@ -98,6 +116,7 @@
           <b:widget-settings>
             <b:widget-setting name='commentLabel'>Comments</b:widget-setting>
             <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+            <b:widget-setting name='authorLabel'>Author:</b:widget-setting>
             <b:widget-setting name='disableGooglePlusShare'>true</b:widget-setting>
             <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
             <b:widget-setting name='timestampLabel'>Date:</b:widget-setting>
@@ -476,18 +495,38 @@
             </a>
           </b:includable>
           <b:includable id='post' var='post'>
-            <div class='post'>
-              <b:include data='post' name='postMeta'/>
-              <b:include data='post' name='postTitle'/>
-              <b:include name='headerByline'/>
-              <b:if cond='data:view.isSingleItem'>
-                <b:include data='post' name='postBody'/>
+              <b:if cond='data:view.isMultipleItems'>
+                <div class='index'>
+                  <b:if cond='data:post.featuredImage'>
+                    <b:with value='resizeImage(data:post.featuredImage, 200, &quot;1:1&quot;)' var='image'>
+                      <div class='post-index-image'>
+                        <img alt='Post Image' border='0' expr:src='data:image'/>
+                      </div>
+                    </b:with>
+                    <b:else/>
+                      <div class='post-index-image'>
+                        <img alt='Post Image' border='0' src='https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=h60'/>
+                      </div>
+                  </b:if>
+                  <div class='post'>
+                    <b:include data='post' name='postMeta'/>
+                    <b:include data='post' name='postTitle'/>
+                    <b:include name='headerByline'/>
+                    <b:include data='post' name='postBodySnippet'/>
+                    <b:include data='post' name='postJumpLink'/>
+                    <b:include data='post' name='postFooter'/>
+                  </div>
+              	</div>
               <b:else/>
-                <b:include data='post' name='postBodySnippet'/>
-                <b:include data='post' name='postJumpLink'/>
+                <div class='post'>
+                  <b:include data='post' name='postMeta'/>
+                  <b:include data='post' name='postTitle'/>
+                  <b:include name='headerByline'/>
+                  <b:include data='post' name='postBody'/>
+                  <b:include data='post' name='postFooter'/>
+                </div>
               </b:if>
-              <b:include data='post' name='postFooter'/>
-            </div>
+
           </b:includable>
           <b:includable id='postAuthor'>
             <span class='byline post-author vcard'>
@@ -765,5 +804,36 @@
 
     <footer>
     </footer>
+
+
+    <script type='text/javascript'>
+    //<![CDATA[
+ 		function shareButtons() {
+			var theClass = document.getElementsByClassName('sharing-platform-button');
+			if(theClass.length > 0) {
+				for(var i = 0; i < theClass.length; i++) {
+					if(theClass[i].getAttribute('aria-label') == 'Get link' || theClass[i].getAttribute('aria-label') == 'Share to other apps') {
+						const link = theClass[i].getAttribute('data-url');
+						theClass[i].parentElement.addEventListener('click', function (event) {
+							toClipboard(link);
+						});
+					} else {
+						const link = theClass[i].getAttribute('data-href');
+						theClass[i].parentElement.addEventListener('click', function (event) {
+							window.open(link, '_blank', 'height=430, width=640' )
+						});
+					}
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+		shareButtons();
+    //]]>
+    </script>
+
+
+
   </body>
 </html>
