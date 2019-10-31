@@ -37,7 +37,7 @@
         */
         /*
         <Group description="Body">
-            <Variable name="background.color" description="Background Color" type="color" default="#FFFFFF"  value="#FFFFFF"/>
+            <Variable name="body.color" description="Body Color" type="color" default="#FFFFFF"  value="#FFFFFF"/>
         </Group>
 
         <Group description="Header">
