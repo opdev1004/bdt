@@ -7,7 +7,7 @@
 	<b:if cond='data:blog.postImageUrl'>
 	<b:else/>
 		<!-- This is meta tag for open graph image that you may want to set up for default. -->
-		<!-- <meta content='Image Url' property='og:image'/> -->
+		<meta content='https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=w1200' property='og:image'/>
 	</b:if>
 
     <!-- if it is post page, show these tags for possible SEO -->
@@ -37,7 +37,7 @@
         */
         /*
         <Group description="Body">
-            <Variable name="background.color" description="Background Color" type="color" default="#FF6F00"  value="#FF6F00"/>
+            <Variable name="background.color" description="Background Color" type="color" default="#FFFFFF"  value="#FFFFFF"/>
         </Group>
 
         <Group description="Header">
