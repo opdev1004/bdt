@@ -4,7 +4,7 @@ This repository contains blogger's default theme for blogger theme development. 
 Happy development!
 
 ## Notice
-Apply Contempo theme to blog first for real use. And let other users know about it.
+Apply Contempo theme to your blog first before you upload Blogger Default Theme. And let other users know about it.
 Optimized version use javascript for sharing buttons and this might occur some problem in user experience. It is up to you to change the code or make it runs only in single post page.
 
 ## Default version
